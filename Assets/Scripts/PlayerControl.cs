@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,45 +7,45 @@ using UnityEngine.InputSystem;
 public class PlayerControl : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float xRange = 5f;
+    [SerializeField] float yRange = 5f;
 
+    [SerializeField] float positionPitchFactor = -2f;
+    [SerializeField] float ControlPitchFacotr = -10f;
+    [SerializeField] float positionYawFactor = -10f;
+    [SerializeField] float ControlRollFacotr = -10f;
     Vector2 movement;
-    Vector2 minBounds;
-    Vector2 maxBounds;
-    Vector2 pos;
 
-    void Start()
-    {
-        InitCamera();
-        pos = transform.localPosition;
-        Debug.Log(pos);
-    }
 
     void Update()
     {
-        PlayerMove();
+        ProcessTranslation();
+        ProcessRotaton();
     }
 
-    void InitCamera()
+    void ProcessRotaton()
     {
-        Camera mainCamera = Camera.main;
-        minBounds = mainCamera.ViewportToWorldPoint(new Vector2(0,0));
-        maxBounds = mainCamera.ViewportToWorldPoint(new Vector2(1,1));
-        Debug.Log(minBounds);
-        Debug.Log(maxBounds);
+        float pitchDueToPosition = transform.localPosition.y * positionPitchFactor;
+        float pitchDueToControl = movement.y * ControlPitchFacotr;
 
+        float pitch =  pitchDueToPosition + pitchDueToControl; 
+        float yaw = transform.localPosition.x * positionYawFactor;
+        float roll = movement.x * ControlRollFacotr;
+        
+        transform.localRotation = Quaternion.Euler(pitch, roll, yaw);
     }
 
-    void PlayerMove()
+    void ProcessTranslation()
     {
-        Vector2 moveInput = movement * moveSpeed * Time.deltaTime;
-        // Vector2 newPos = new Vector2();
-        // newPos.x = Mathf.Clamp(pos.x + moveInput.x, minBounds.x, maxBounds.x);
-        // newPos.y = Mathf.Clamp(pos.y + moveInput.y, minBounds.y, maxBounds.y);
-        // Debug.Log(pos.y);
-        // Debug.Log(pos.y);
+        float xOffset = movement.x * moveSpeed * Time.deltaTime;
+        float rawXpos = transform.localPosition.x + xOffset;
+        float clampedXpos = Mathf.Clamp(rawXpos + xOffset, -xRange, xRange);
 
-        // transform.localPosition = newPos;
-        transform.localPosition = moveInput;
+        float yOffset = movement.y * moveSpeed * Time.deltaTime;
+        float rawYpos = transform.localPosition.y + yOffset;
+        float clampedYpos = Mathf.Clamp(rawYpos + yOffset, -yRange + 5.3f, yRange);
+
+        transform.localPosition = new Vector3(clampedXpos, clampedYpos, transform.localPosition.z);
     }
 
 
@@ -52,5 +53,6 @@ public class PlayerControl : MonoBehaviour
     void OnMove(InputValue value)
     {
         movement = value.Get<Vector2>();
+        Debug.Log(movement);
     }
 }
