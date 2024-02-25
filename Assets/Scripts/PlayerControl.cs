@@ -3,16 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 10f;
-    [SerializeField] float xRange = 5f;
-    [SerializeField] float yRange = 5f;
+    [Header("General Setup Settings")]
+    [Tooltip("How fast ship moves up and down base upon player Input")] [SerializeField] float moveSpeed = 10f;
+    [Tooltip("How fast player moves horizontaly")] [SerializeField] float xRange = 5f;
+    [Tooltip("How fast player moves vertical")] [SerializeField] float yRange = 5f;
 
+    [Header("Screen position based tuning")]
     [SerializeField] float positionPitchFactor = -2f;
-    [SerializeField] float ControlPitchFacotr = -10f;
     [SerializeField] float positionYawFactor = -10f;
+
+    [Header("Player input based tuning")]
+    [SerializeField] float ControlPitchFacotr = -10f;
     [SerializeField] float ControlRollFacotr = -10f;
     Vector2 movement;
 
@@ -22,6 +27,7 @@ public class PlayerControl : MonoBehaviour
         ProcessTranslation();
         ProcessRotaton();
     }
+
 
     void ProcessRotaton()
     {
@@ -55,4 +61,6 @@ public class PlayerControl : MonoBehaviour
         movement = value.Get<Vector2>();
         Debug.Log(movement);
     }
+
+ 
 }

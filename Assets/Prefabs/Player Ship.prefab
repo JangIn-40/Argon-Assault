@@ -109,8 +109,8 @@ MonoBehaviour:
   xRange: 10
   yRange: 9
   positionPitchFactor: -2
-  ControlPitchFacotr: -10
   positionYawFactor: -10
+  ControlPitchFacotr: -10
   ControlRollFacotr: -3
 --- !u!1001 &367948523400155121
 PrefabInstance:
@@ -680,7 +680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3740010027679613872, guid: 0a574819a963c554aa464ba65762bda6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.15
+      value: 1.89
       objectReference: {fileID: 0}
     - target: {fileID: 3740010027679613872, guid: 0a574819a963c554aa464ba65762bda6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1222,7 +1222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3740010027679613872, guid: 0a574819a963c554aa464ba65762bda6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.02
+      value: 1.68
       objectReference: {fileID: 0}
     - target: {fileID: 3740010027679613872, guid: 0a574819a963c554aa464ba65762bda6, type: 3}
       propertyPath: m_LocalRotation.w
