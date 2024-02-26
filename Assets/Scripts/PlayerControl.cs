@@ -21,11 +21,16 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] float ControlRollFacotr = -10f;
     Vector2 movement;
 
+    public bool isAlive = true;
+
 
     void Update()
     {
-        ProcessTranslation();
-        ProcessRotaton();
+        if(isAlive)
+        {
+            ProcessTranslation();
+            ProcessRotaton();
+        }
     }
 
 
@@ -59,7 +64,6 @@ public class PlayerControl : MonoBehaviour
     void OnMove(InputValue value)
     {
         movement = value.Get<Vector2>();
-        Debug.Log(movement);
     }
 
  
