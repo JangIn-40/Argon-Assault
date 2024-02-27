@@ -1,37 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject enemyExplosinVFX;
-    [SerializeField] Transform parent;
+    [SerializeField] GameObject enemyHitExplosionVFX;
+
     [SerializeField] int amountIncreaseScore;
+    [SerializeField] int hp = 3;
 
     ScoreBoard scoreBoard;
+    GameObject parentGameObject;
+
+
 
     void Start()
     {
+        parentGameObject = GameObject.FindWithTag("Spawn At Runtime");
         scoreBoard = FindObjectOfType<ScoreBoard>();
+        AddRigidBody();
+    }
+
+    void AddRigidBody()
+    {
+        Rigidbody rb = gameObject.AddComponent<Rigidbody>();
+        rb.useGravity = false;
     }
 
     void OnParticleCollision(GameObject other)
     {
-        KillEnemy();
-        ProcessHit();
 
+
+        ProcessHit();
+        if(hp < 1)
+        {
+
+            KillEnemy();
+        }
     }
 
     void KillEnemy()
     {
-        Destroy(gameObject);
+
+        scoreBoard.IncreaseScore(amountIncreaseScore);
         GameObject vfx = Instantiate(enemyExplosinVFX, transform.position, Quaternion.identity);
-        vfx.transform.parent = parent;
+        vfx.transform.parent = parentGameObject.transform; 
+        Destroy(gameObject);
     }
 
     void ProcessHit()
     {
-        scoreBoard.IncreaseScore(amountIncreaseScore);
+        hp--;
+
+        GameObject vfx = Instantiate(enemyHitExplosionVFX, transform.position, Quaternion.identity);
+        vfx.transform.parent = parentGameObject.transform;
     }
 }
