@@ -1082,6 +1082,7 @@ GameObject:
   - component: {fileID: 3249219834301553985}
   - component: {fileID: 693420294823035187}
   - component: {fileID: 116637642777869494}
+  - component: {fileID: 1440283445689000938}
   m_Layer: 0
   m_Name: SilverShip
   m_TagString: Untagged
@@ -1169,10 +1170,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1514f58c04233d7478d404d2392ef2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyExplosinVFX: {fileID: 7177437355420164336, guid: 7a55404f901a86d4ea9e8997ceb5abb3, type: 3}
+  enemyExplosinFX: {fileID: 7177437355420164336, guid: 7a55404f901a86d4ea9e8997ceb5abb3, type: 3}
   enemyHitExplosionVFX: {fileID: 7177437355420164336, guid: f53b4687c94818d4bbfeec4b09015e80, type: 3}
   amountIncreaseScore: 120
   hp: 3
+--- !u!65 &1440283445689000938
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8943963061931866290}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 12.008005, y: 5.232236, z: 13.0688305}
+  m_Center: {x: 0, y: -0.000000834465, z: 0.000015497208}
 --- !u!1 &8952985046923876293
 GameObject:
   m_ObjectHideFlags: 0

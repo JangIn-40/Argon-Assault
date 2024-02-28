@@ -8,7 +8,7 @@ using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] GameObject enemyExplosinVFX;
+    [SerializeField] GameObject enemyExplosinFX;
     [SerializeField] GameObject enemyHitExplosionVFX;
 
     [SerializeField] int amountIncreaseScore;
@@ -46,9 +46,9 @@ public class Enemy : MonoBehaviour
 
     void KillEnemy()
     {
-
         scoreBoard.IncreaseScore(amountIncreaseScore);
-        GameObject vfx = Instantiate(enemyExplosinVFX, transform.position, Quaternion.identity);
+
+        GameObject vfx = Instantiate(enemyExplosinFX, transform.position, Quaternion.identity);
         vfx.transform.parent = parentGameObject.transform; 
         Destroy(gameObject);
     }
